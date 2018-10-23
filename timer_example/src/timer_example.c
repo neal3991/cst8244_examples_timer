@@ -33,7 +33,9 @@ int main(int argc, char* argv[]){
    event.sigev_coid = ConnectAttach(ND_LOCAL_NODE, 0,
                                     chid,
                                     _NTO_SIDE_CHANNEL, 0);
-   event.sigev_priority = getprio(0);
+   //FIXME :: getprio() is deprecated
+//   event.sigev_priority = getprio(0);
+   event.sigev_priority = SchedGet( 0, 0, NULL);
    event.sigev_code = MY_PULSE_CODE;
    timer_create(CLOCK_REALTIME, &event, &timer_id);
 
