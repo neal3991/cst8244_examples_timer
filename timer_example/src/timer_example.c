@@ -3,6 +3,10 @@
  * sends us a pulse.  This example sets the first
  * expiry to 1.5 seconds and the repetition interval
  * to 1.5 seconds.
+ *
+ * Revision History
+ * 	Replaced getprio() (deprecated in QNX 7.0) with SchedGet()
+ * 	@author hurdleg@algonquincollege.com
  */
 
 #include <stdio.h>
@@ -33,8 +37,11 @@ int main(int argc, char* argv[]){
    event.sigev_coid = ConnectAttach(ND_LOCAL_NODE, 0,
                                     chid,
                                     _NTO_SIDE_CHANNEL, 0);
-   //FIXME :: getprio() is deprecated
+   //FIXME :: getprio() is discontinued (deprecated) in QNX 7.0
+   //TODO :: see http://www.qnx.com/developers/docs/7.0.0/index.html#com.qnx.doc.neutrino.lib_ref/topic/whats_new_qnx_70.html#whats_new_qnx_70__Discontinued
 //   event.sigev_priority = getprio(0);
+   //TODO :: replace with SchedGet()
+   //TODO :: see http://www.qnx.com/developers/docs/7.0.0/index.html#com.qnx.doc.neutrino.lib_ref/topic/s/schedget.html
    event.sigev_priority = SchedGet( 0, 0, NULL);
    event.sigev_code = MY_PULSE_CODE;
    timer_create(CLOCK_REALTIME, &event, &timer_id);
