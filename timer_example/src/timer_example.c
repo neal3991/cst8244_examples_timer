@@ -42,7 +42,7 @@ int main(int argc, char* argv[]){
 //   event.sigev_priority = getprio(0);
    //TODO :: replace with SchedGet()
    //TODO :: see http://www.qnx.com/developers/docs/7.0.0/index.html#com.qnx.doc.neutrino.lib_ref/topic/s/schedget.html
-   event.sigev_priority = SchedGet( 0, 0, NULL);
+   event.sigev_priority = SchedGet( 0, 0, NULL );
    event.sigev_code = MY_PULSE_CODE;
    timer_create(CLOCK_REALTIME, &event, &timer_id);
 
